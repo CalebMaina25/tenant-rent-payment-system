@@ -1,5 +1,4 @@
 const { Sequelize } = require('sequelize');
-const path = require('path');
 
 // Load environment variables
 require('dotenv').config();
@@ -13,7 +12,7 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || 3306,
     dialect: 'mysql',
-    logging: process.env.NODE_ENV === 'development' ? console.log : false,
+    logging: process.env.NODE_ENV === 'development' ? console.info : false,
     pool: {
       max: 10,
       min: 2,
@@ -32,7 +31,7 @@ const sequelize = new Sequelize(
 // Test connection
 sequelize.authenticate()
   .then(() => {
-    console.log('✅ Database connection successful');
+    console.info('✅ Database connection successful');
   })
   .catch(err => {
     console.error('❌ Database connection failed:', err);
